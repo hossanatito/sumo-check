@@ -21,15 +21,15 @@ interface DealFormProps {
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" aria-disabled={pending} disabled={pending} className="bg-[#7ade9b] hover:bg-[#54d67e] text-primary-foreground rounded-none">
+    <Button type="submit" aria-disabled={pending} disabled={pending} className="bg-[#7ade9b] hover:bg-[#54d67e] text-black rounded-none">
       {pending ? (
         <>
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          <Loader2 className="mr-2 h-4 w-4 animate-spin text-black" />
           Checking...
         </>
       ) : (
         <>
-          <Search className="mr-2 h-4 w-4" />
+          <Search className="mr-2 h-4 w-4 text-black" />
           Check Deal
         </>
       )}
@@ -86,8 +86,9 @@ export function DealForm({ setDealData, setIsLoading }: DealFormProps) {
            <AlertDescription>{state.error}</AlertDescription>
          </Alert>
        )}
-       <SubmitButton />
+       <div className="flex justify-center">
+           <SubmitButton />
+       </div>
     </form>
   );
 }
-
