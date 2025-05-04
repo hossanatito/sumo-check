@@ -18,7 +18,7 @@ const robotoMono = Roboto_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Deal Detective', // Updated title
+  title: 'Sumo Check', // Updated title
   description: 'Check AppSumo deal details quickly.', // Updated description
 };
 
@@ -28,8 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // Apply suppressHydrationWarning to the html tag
-    <html lang="en" suppressHydrationWarning={true} className={`${inter.variable} ${robotoMono.variable}`}>
+    // Apply suppressHydrationWarning to the html tag and enforce dark theme
+    <html lang="en" suppressHydrationWarning={true} className={`${inter.variable} ${robotoMono.variable} dark`}>
       {/* Apply suppressHydrationWarning to the body tag as well to handle browser extension injections */}
       <body
         className={`antialiased`}

@@ -19,10 +19,10 @@ const sanitizeHtml = (htmlString: string): string => {
 
 export function FeatureList({ features }: FeatureListProps) {
   return (
-    <ul className="space-y-2">
+    <ul className="space-y-1.5 text-sm text-foreground/80"> {/* Adjusted text color */}
       {features.map((feature) => (
         <li key={feature.id} className="flex items-start space-x-2">
-          <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+          <CheckCircle className="h-4 w-4 text-primary/80 mt-0.5 flex-shrink-0" /> {/* Slightly muted icon */}
           {/* Use dangerouslySetInnerHTML after basic sanitization */}
           <span dangerouslySetInnerHTML={{ __html: sanitizeHtml(feature.feature) }} />
         </li>

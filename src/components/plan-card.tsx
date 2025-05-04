@@ -8,10 +8,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { FeatureList } from "./feature-list";
 import { TermList } from "./term-list";
-import { DollarSign, Tag } from "lucide-react";
+import { DollarSign, Tag, Check, Star } from "lucide-react"; // Added Check, Star
 
 interface PlanCardProps {
   plan: Plan;
@@ -19,41 +18,45 @@ interface PlanCardProps {
 
 export function PlanCard({ plan }: PlanCardProps) {
   return (
-    <Card className="flex flex-col transition-shadow duration-300 hover:shadow-lg">
-      <CardHeader>
-        <div className="flex justify-between items-start gap-2">
+    <Card className="flex flex-col transition-shadow duration-300 hover:shadow-xl bg-card border border-border/50 rounded-lg overflow-hidden">
+      <CardHeader className="bg-muted/20 p-4 border-b border-border/50"> {/* Slightly different header bg */}
+        <div className="flex justify-between items-start gap-2 mb-2">
           <div>
-             <CardTitle className="text-xl font-semibold">{plan.public_name}</CardTitle>
-            <CardDescription className="text-sm">{plan.plan_desc}</CardDescription>
+             <CardTitle className="text-lg font-semibold text-foreground">{plan.public_name}</CardTitle>
+            {plan.plan_desc && <CardDescription className="text-xs text-muted-foreground mt-1">{plan.plan_desc}</CardDescription>}
           </div>
-          {plan.highlight && <Badge variant="secondary">Highlight</Badge>}
-           {plan.is_plus_tier && <Badge variant="outline">Plus Tier</Badge>}
+          <div className="flex flex-col items-end gap-1">
+             {plan.highlight && <Badge variant="secondary" className="flex items-center gap-1 text-xs"><Star className="w-3 h-3"/> Highlight</Badge>}
+             {plan.is_plus_tier && <Badge variant="outline" className="text-xs border-primary/50 text-primary">Plus Tier</Badge>}
+           </div>
         </div>
-        <div className="flex items-baseline space-x-2 pt-2">
-           <DollarSign className="h-6 w-6 text-primary" />
-           <span className="text-3xl font-bold text-primary">${plan.price}</span>
+        <div className="flex items-baseline space-x-1 pt-1">
+           <DollarSign className="h-5 w-5 text-primary" />
+           <span className="text-2xl font-bold text-primary">${plan.price}</span>
            {plan.original_price && plan.original_price !== "0.00" && (
-            <span className="text-sm text-muted-foreground line-through">
+            <span className="text-xs text-muted-foreground line-through">
               ${plan.original_price}
             </span>
           )}
         </div>
-         <Badge variant="outline" className="w-fit mt-1">
+         <Badge variant="outline" className="w-fit mt-2 text-xs border-border/60">
             <Tag className="h-3 w-3 mr-1" /> {plan.plan_type} - {plan.codes} Code{plan.codes !== 1 ? 's' : ''}
         </Badge>
 
       </CardHeader>
-      <CardContent className="flex-grow space-y-4">
+      <CardContent className="flex-grow space-y-4 p-4">
         <div>
-          <h4 className="text-md font-medium mb-2">Features:</h4>
+          <h4 className="text-sm font-medium mb-2 text-foreground/90">Features:</h4>
           <FeatureList features={plan.plan_features} />
         </div>
 
       </CardContent>
-       <CardFooter className="flex flex-col items-start pt-4 border-t">
-         <h4 className="text-md font-medium mb-2">Terms:</h4>
-         <TermList terms={plan.terms} />
-       </CardFooter>
+       {plan.terms && plan.terms.length > 0 && (
+         <CardFooter className="flex flex-col items-start p-4 border-t border-border/50 bg-muted/10">
+           <h4 className="text-sm font-medium mb-2 text-foreground/90">Terms:</h4>
+           <TermList terms={plan.terms} />
+         </CardFooter>
+       )}
     </Card>
   );
 }

@@ -21,7 +21,7 @@ interface DealFormProps {
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" aria-disabled={pending} disabled={pending}>
+    <Button type="submit" aria-disabled={pending} disabled={pending} className="bg-primary hover:bg-primary/90 text-primary-foreground">
       {pending ? (
         <>
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -40,7 +40,6 @@ function SubmitButton() {
 
 export function DealForm({ setDealData, setIsLoading }: DealFormProps) {
    const initialState = { success: false, error: undefined, data: undefined };
-   // Use useActionState from React instead of useFormState from react-dom
    const [state, formAction] = useActionState(fetchDealInfo, initialState);
    const { pending } = useFormStatus();
    const { toast } = useToast();
@@ -70,19 +69,19 @@ export function DealForm({ setDealData, setIsLoading }: DealFormProps) {
   return (
     <form action={formAction} className="space-y-4 w-full max-w-xl">
       <div className="space-y-2">
-        <Label htmlFor="url">AppSumo Deal URL</Label>
+        <Label htmlFor="url" className="text-foreground/90">AppSumo Deal URL</Label>
         <Input
           id="url"
           name="url"
           type="url"
           placeholder="https://appsumo.com/products/your-deal/"
           required
-          className="text-base"
+          className="text-base bg-input border-border focus:ring-primary" // Dark theme input styles
         />
       </div>
        {state?.error && !pending && (
-         <Alert variant="destructive">
-           <Terminal className="h-4 w-4" />
+         <Alert variant="destructive" className="bg-destructive/10 border-destructive/50 text-destructive">
+           <Terminal className="h-4 w-4 text-destructive" />
            <AlertTitle>Error</AlertTitle>
            <AlertDescription>{state.error}</AlertDescription>
          </Alert>
