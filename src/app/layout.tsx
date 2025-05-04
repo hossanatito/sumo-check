@@ -1,16 +1,20 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Inter, Roboto_Mono } from 'next/font/google'; // Import standard Google Fonts
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"; // Import Toaster
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+// Configure Inter font
+const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
+  display: 'swap', // Ensure text remains visible during font loading
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+// Configure Roboto Mono font
+const robotoMono = Roboto_Mono({
+  variable: '--font-roboto-mono',
   subsets: ['latin'],
+  display: 'swap', // Ensure text remains visible during font loading
 });
 
 export const metadata: Metadata = {
@@ -24,8 +28,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning={true}>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    // Apply suppressHydrationWarning to the html tag
+    <html lang="en" suppressHydrationWarning={true} className={`${inter.variable} ${robotoMono.variable}`}>
+      {/* Remove suppressHydrationWarning from body if not needed, apply font variables */}
+      <body
+        className={`antialiased`}
+      >
         {children}
         <Toaster /> {/* Add Toaster for notifications */}
       </body>
