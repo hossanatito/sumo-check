@@ -21,7 +21,7 @@ interface DealFormProps {
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" aria-disabled={pending} disabled={pending} className="bg-primary hover:bg-primary/90 text-primary-foreground">
+    <Button type="submit" aria-disabled={pending} disabled={pending} className="bg-[#7ade9b] hover:bg-[#54d67e] text-primary-foreground rounded-none">
       {pending ? (
         <>
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -67,7 +67,7 @@ export function DealForm({ setDealData, setIsLoading }: DealFormProps) {
     }, [state, pending]);
 
   return (
-    <form action={formAction} className="space-y-4 w-full max-w-xl">
+    <form action={formAction} className="space-y-4 w-full max-w-xl items-center">
       <div className="space-y-2">
         <Label htmlFor="url" className="text-foreground/90">AppSumo Deal URL</Label>
         <Input
@@ -90,3 +90,4 @@ export function DealForm({ setDealData, setIsLoading }: DealFormProps) {
     </form>
   );
 }
+
