@@ -18,9 +18,9 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'appsumo2-cdn.appsumo.com',
+        hostname: 'appsumo2-cdn.appsumo.com', // Added this hostname
         port: '',
-        pathname: '/media/**', // Be more specific if possible, e.g., '/media/selfsubmissions/images/**'
+        pathname: '/media/**', // Allow images from the /media/ path
       },
     ],
   },
