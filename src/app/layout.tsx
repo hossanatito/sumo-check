@@ -30,9 +30,10 @@ export default function RootLayout({
   return (
     // Apply suppressHydrationWarning to the html tag
     <html lang="en" suppressHydrationWarning={true} className={`${inter.variable} ${robotoMono.variable}`}>
-      {/* Remove suppressHydrationWarning from body if not needed, apply font variables */}
+      {/* Apply suppressHydrationWarning to the body tag as well to handle browser extension injections */}
       <body
         className={`antialiased`}
+        suppressHydrationWarning={true}
       >
         {children}
         <Toaster /> {/* Add Toaster for notifications */}
