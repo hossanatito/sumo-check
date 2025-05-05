@@ -25,8 +25,8 @@ SumoCheck is a Next.js application that allows you to quickly retrieve and revie
 1.  **Clone the repository:**
 
     ```bash
-    git clone <repository-url>
-    cd <repository-directory>
+    git clone https://github.com/hossanatito/sumo-check.git
+    cd sumo-check
     ```
 
 2.  **Install dependencies:**
