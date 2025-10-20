@@ -18,8 +18,8 @@ interface PlanCardProps {
 
 export function PlanCard({ plan }: PlanCardProps) {
   return (
-    <Card className="flex flex-col transition-shadow duration-300 hover:shadow-xl bg-card border border-border/50 rounded-lg overflow-hidden">
-      <CardHeader className="bg-muted/20 p-4 border-b border-border/50"> {/* Slightly different header bg */}
+    <Card className="flex flex-col glass hover-lift rounded-lg overflow-hidden">
+      <CardHeader className="bg-gradient-to-br from-primary/5 to-transparent p-4 border-b border-border/50"> {/* Slightly different header bg */}
         <div className="flex justify-between items-start gap-2 mb-2">
           <div>
              <CardTitle className="text-lg font-semibold text-foreground">{plan.public_name}</CardTitle>

@@ -67,7 +67,7 @@ export function DealForm({ setDealData, setIsLoading }: DealFormProps) {
     }, [state, pending]);
 
   return (
-    <form action={formAction} className="space-y-4 w-full max-w-xl items-center">
+    <form action={formAction} className="space-y-4 w-full max-w-xl items-center glass-strong p-8 rounded-2xl glow-border">
       <div className="space-y-2">
         <Label htmlFor="url" className="text-foreground/90">AppSumo Deal URL</Label>
         <Input
