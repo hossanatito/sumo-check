@@ -35,6 +35,20 @@ export default function RootLayout({
         className={`antialiased`}
         suppressHydrationWarning={true}
       >
+        {/* V2 Notification Banner */}
+        <div className="w-full bg-primary text-primary-foreground py-3 px-4 text-center">
+          <p className="text-sm font-medium">
+            🎉 v2 is now live!{' '}
+            <a
+              href="https://sumocheck.appsdyno.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline font-semibold hover:text-white transition-colors"
+            >
+              Check it out →
+            </a>
+          </p>
+        </div>
         {children}
         <Toaster /> {/* Add Toaster for notifications */}
       </body>
