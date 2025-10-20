@@ -11,8 +11,8 @@ interface DealDisplayProps {
 
 export function DealDisplay({ deal }: DealDisplayProps) {
   return (
-    <Card className="w-full max-w-5xl mx-auto overflow-hidden mt-6 bg-card shadow-lg border-border">
-      <CardHeader className="bg-muted/30 p-6 border-b border-border/50"> {/* Subtle header background */}
+    <Card className="w-full max-w-5xl mx-auto overflow-hidden mt-6 glass-strong glow-border shadow-2xl">
+      <CardHeader className="bg-gradient-to-br from-primary/10 to-transparent p-6 border-b border-border/50"> {/* Subtle header background */}
          <div className="flex flex-col md:flex-row items-start gap-4">
           {deal.Image1 ? (
             <Image

@@ -13,11 +13,13 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-6 md:p-12 lg:p-24 bg-background">
+    <main className="flex min-h-screen flex-col items-center p-6 md:p-12 lg:p-24">
        <div className="text-center mb-12 w-full max-w-2xl">
-          <div className="flex items-center justify-center gap-3 mb-4">
-             <PackageSearch className="h-10 w-10 text-primary"/>
-             <h1 className="text-4xl font-bold tracking-tight text-foreground" style={{ fontFamily: 'Roboto Mono, monospace' }}>
+          <div className="flex items-center justify-center gap-3 mb-6">
+             <div className="p-3 glass-strong rounded-xl glow-border">
+               <PackageSearch className="h-10 w-10 text-primary drop-shadow-[0_0_8px_rgba(16,185,129,0.6)]"/>
+             </div>
+             <h1 className="text-5xl font-bold tracking-tight text-foreground drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]" style={{ fontFamily: 'Roboto Mono, monospace' }}>
                 SumoCheck
              </h1>
           </div>
