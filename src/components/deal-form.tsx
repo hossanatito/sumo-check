@@ -1,15 +1,20 @@
 "use client";
 
-import { useActionState, useEffect } from "react"; // Import useActionState from React
-import { useFormStatus } from "react-dom";
-import { fetchDealInfo } from "@/app/actions";
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Terminal, Loader2, Search } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle
+} from "@/components/ui/alert-dialog";
+import { Search } from "lucide-react";
 import type { Deal } from "@/types/deal";
-import { useToast } from "@/hooks/use-toast";
 
 
 interface DealFormProps {
@@ -17,78 +22,60 @@ interface DealFormProps {
   setIsLoading: (loading: boolean) => void;
 }
 
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <Button type="submit" aria-disabled={pending} disabled={pending} className="bg-[#7ade9b] hover:bg-[#54d67e] text-black rounded-none">
-      {pending ? (
-        <>
-          <Loader2 className="mr-2 h-4 w-4 animate-spin text-black" />
-          Checking...
-        </>
-      ) : (
-        <>
-          <Search className="mr-2 h-4 w-4 text-black" />
-          Check Deal
-        </>
-      )}
-    </Button>
-  );
-}
-
-
 export function DealForm({ setDealData, setIsLoading }: DealFormProps) {
-   const initialState = { success: false, error: undefined, data: undefined };
-   const [state, formAction] = useActionState(fetchDealInfo, initialState);
-   const { pending } = useFormStatus();
-   const { toast } = useToast();
+   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-    useEffect(() => {
-        setIsLoading(pending);
-        if (!pending && state) {
-             if (state.success && state.data) {
-                setDealData(state.data);
-                toast({
-                  title: "Success!",
-                  description: "Deal information loaded.",
-                });
-             } else if (state.error) {
-                setDealData(null); // Clear previous data on error
-                toast({
-                  variant: "destructive",
-                  title: "Error",
-                  description: state.error,
-                });
-             }
-         }
-    // Only run effect when state changes or pending status changes
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [state, pending]);
+   const handleSubmit = (e: React.FormEvent) => {
+     e.preventDefault(); // Prevent form submission
+     setIsDialogOpen(true); // Show the V2 notification dialog
+   };
 
   return (
-    <form action={formAction} className="space-y-4 w-full max-w-xl items-center glass-strong p-8 rounded-2xl glow-border">
-      <div className="space-y-2">
-        <Label htmlFor="url" className="text-foreground/90">AppSumo Deal URL</Label>
-        <Input
-          id="url"
-          name="url"
-          type="url"
-          placeholder="https://appsumo.com/products/your-deal/"
-          required
-          className="text-base bg-input border-border focus:ring-primary" // Dark theme input styles
-        />
-      </div>
-       {state?.error && !pending && (
-         <Alert variant="destructive" className="bg-destructive/10 border-destructive/50 text-destructive">
-           <Terminal className="h-4 w-4 text-destructive" />
-           <AlertTitle>Error</AlertTitle>
-           <AlertDescription>{state.error}</AlertDescription>
-         </Alert>
-       )}
-       <div className="flex justify-center">
-           <SubmitButton />
-       </div>
-    </form>
+    <>
+      <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-xl items-center glass-strong p-8 rounded-2xl glow-border">
+        <div className="space-y-2">
+          <Label htmlFor="url" className="text-foreground/90">AppSumo Deal URL</Label>
+          <Input
+            id="url"
+            name="url"
+            type="url"
+            placeholder="https://appsumo.com/products/your-deal/"
+            required
+            className="text-base bg-input border-border focus:ring-primary" // Dark theme input styles
+            disabled
+          />
+        </div>
+        <div className="flex justify-center">
+          <Button type="submit" className="bg-[#7ade9b] hover:bg-[#54d67e] text-black rounded-none">
+            <Search className="mr-2 h-4 w-4 text-black" />
+            Check Deal
+          </Button>
+        </div>
+      </form>
+
+      <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-2xl">V2 of SumoCheck is Now Available!</AlertDialogTitle>
+            <AlertDialogDescription className="text-base">
+              We've launched a new and improved version of SumoCheck with better features and performance.
+              Visit the new version to continue checking AppSumo deals.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction asChild>
+              <a
+                href="https://sumocheck.appsdyno.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto"
+              >
+                Go to V2
+              </a>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 }
