@@ -48,7 +48,7 @@ export function DealForm({ setDealData, setIsLoading }: DealFormProps) {
         <div className="flex justify-center">
           <Button type="submit" className="bg-[#7ade9b] hover:bg-[#54d67e] text-black rounded-none">
             <Search className="mr-2 h-4 w-4 text-black" />
-            Check Deal
+            Version 2 Active - Click Here to Access
           </Button>
         </div>
       </form>
